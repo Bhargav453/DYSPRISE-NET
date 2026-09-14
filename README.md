@@ -5,9 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Framework: Transformers](https://img.shields.io/badge/HuggingFace-Transformers-yellow.svg)](https://huggingface.co/)
 
-**DYSPRISE** is an advanced end-to-end deep speech enhancement framework designed to reconstruct clean, high-intelligibility speech from highly distorted, low-SNR, and pathological or dysarthric audio signals.
+**DysPriSE-Net** a prior-guided neural speech enhancement framework that integrate noisy speech feature with complementary wiener-Decision Directed and spectral Substraction.
 
-By uniting **multi-stream heterogeneous feature projection**, **context-aware gated fusion**, a **2D Axial Factorized Conformer encoder**, and **phase-aware complex spectral decoding**, DYSPRISE achieves superior perceptual quality (PESQ) and speech intelligibility (STOI). The model is optimized using a **Two-Stage Multi-Objective Training Strategy** that couples spectral/time-domain reconstruction with neural quality loss fine-tuning driven by a frozen HuBERT-powered MOSA-Net.
+By uniting **multi-stream heterogeneous feature projection**, **context-aware gated fusion**, a **2D Axial Factorized Conformer encoder**, and **phase-aware complex spectral decoding**, DYSPRISE achieves superior perceptual quality (PESQ). The model is optimized using a **Two-Stage Multi-Objective Training Strategy** that couples spectral/time-domain reconstruction with neural quality loss fine-tuning driven by a frozen HuBERT-powered MOSA-Net.
 
 ---
 
@@ -203,7 +203,7 @@ Executes Stage 1 pre-training followed automatically by Stage 2 quality loss fin
 ```bash
 python train_two_stage.py \
     --mode two_stage \
-    --epochs_stage1 80 \
+    --epochs_stage1 60 \
     --epochs_stage2 40 \
     --batch_size 4 \
     --accum_steps 2 \
@@ -217,7 +217,7 @@ Trains magnitude and complex spectrogram reconstruction without quality loss ($\
 ```bash
 python train_two_stage.py \
     --mode stage1 \
-    --epochs_stage1 50 \
+    --epochs_stage1 60 \
     --batch_size 4 \
     --runs_dir runs_stage1
 ```
@@ -296,25 +296,4 @@ python config.py
 | | `lambda_pesq` | `0.08163` | Scaling weight for raw PESQ MSE ($1 / 3.5^2$) |
 | | `lambda_stoi` | `1.0` | Scaling weight for STOI MSE |
 
----
-
-## Citation & Acknowledgments
-
-If you utilize DYSPRISE or its modules in your research, please cite:
-
-```bibtex
-@article{dysprise2026,
-  title={DYSPRISE: Dual-Stage End-to-End Speech Enhancement with TF-Conformer and Phase-Aware Decoding},
-  author={DYSPRISE Contributors},
-  journal={arXiv preprint},
-  year={2026}
-}
-```
-
-This project incorporates the **MOSA-Net** quality assessment model with **HuBERT** self-supervised representations for perceptual quality-guided optimization.
-
----
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+  
