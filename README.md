@@ -1,4 +1,4 @@
-# DYSPRISE: Dual-Stage Speech Enhancement with 2D Axial Conformer and Phase-Aware Decoding
+# DYSPRISE-NET: Prior-guided speech enhancement for dysarthric speech
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch 2.0+](https://img.shields.io/badge/PyTorch-2.0%2B-orange.svg)](https://pytorch.org/)
@@ -119,9 +119,6 @@ DYSPRISE/
 ├── train_two_stage.py              # Automated Stage 1 & Stage 2 training workflow
 ├── test_standard_metrics.py        # Official ITU-T PESQ & STOI evaluation script
 │
-├── csv_data_splits/                # Dataset manifest directory
-│   └── manifest_template.csv       # Sample CSV format showing required columns
-│
 └── mosanet/                        # Pretrained assessment network package
     ├── __init__.py                 # MOSA-Net module exports
     ├── mosanet.py                  # MOSA-Net architecture definition
@@ -206,7 +203,7 @@ Executes Stage 1 pre-training followed automatically by Stage 2 quality loss fin
 ```bash
 python train_two_stage.py \
     --mode two_stage \
-    --epochs_stage1 50 \
+    --epochs_stage1 80 \
     --epochs_stage2 40 \
     --batch_size 4 \
     --accum_steps 2 \
@@ -264,8 +261,6 @@ python test_standard_metrics.py \
 - **CSIG**: Mean Opinion Score for Speech Signal Distortion ($1.0$ to $5.0$).
 - **CBAK**: Mean Opinion Score for Background Noise Intrusion ($1.0$ to $5.0$).
 - **COVL**: Overall Quality MOS ($1.0$ to $5.0$).
-- **SI-SDR**: Scale-Invariant Signal-to-Distortion Ratio in dB.
-- **Spectral SNR**: Spectrogram Signal-to-Noise Ratio in dB.
 
 **Outputs Generated in `--out_dir`:**
 - `comparative_standard_results.csv`: Per-sample 3-way metrics comparing Noisy Speech, Enhanced Speech, and Clean Reference Speech.
