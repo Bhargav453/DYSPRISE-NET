@@ -155,9 +155,9 @@ class TrainingConfig:
     weight_decay: float = 1e-4     # Weight decay: 1e-4
 
     # Two-stage training schedule defaults
-    num_epochs_pretrain: int = 50  # Stage 1 pre-training: ~50 epochs
+    num_epochs_pretrain: int = 60  # Stage 1 pre-training: ~50 epochs
     num_epochs_qi_finetune: int = 40 # Stage 2 fine-tuning: ~40 epochs
-    num_epochs: int = 50           # Default total training epochs
+    num_epochs: int = 60           # Default total training epochs
 
     grad_clip_norm: float = 5.0    # Gradient clipping: 5.0
     lr_scheduler: str = "plateau"  # "plateau" (ReduceLROnPlateau) or "cosine"
